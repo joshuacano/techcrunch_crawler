@@ -14,7 +14,7 @@ The testing was done using the pytest and mock libraries.
 - Currently the output is sorted by url, feel free to change this in in the last line of the script.
 - I tried to follow pep8 as close as I can. The Test's could certainly be coded more modularly, but I feel like the test code is "good enough" for now.
 
-To call the script use the following syntax:
+To call the script, use the following syntax:
 ```
 python3 company_reader/main.py path/to/file.csv
 ```
