@@ -15,7 +15,9 @@ The testing was done using the pytest and mock libraries.
 - I tried to follow pep8 as close as I can. The Test's could certainly be coded more modularly, but I feel like the test code is "good enough" for now.
 
 To call the script use the following syntax:
-`python3 company_reader/main.py path/to/file.csv`
+```
+python3 company_reader/main.py path/to/file.csv
+```
 or
 `python3 company_reader/main.py -h` for a description of the inputs necessary
 
