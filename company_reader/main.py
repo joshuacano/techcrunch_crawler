@@ -1,16 +1,16 @@
 """Main script to read companies from techcrunch main page"""
 
 # Some Ideas to improve this script:
-# Use some nlp software to calculate subject or main subjects. 
+# Use some nlp software to calculate subject or main subjects.
 # (We can use scikit-learn for simple bag of words to start).
 
 import argparse
-from bs4 import BeautifulSoup
 import csv
-import datetime
-import grequests
 import logging
 import re
+
+from bs4 import BeautifulSoup
+import grequests
 import requests
 
 
@@ -50,13 +50,15 @@ logging.basicConfig(format=LOG_FORMAT, level=logging.INFO)
 logger = logging.getLogger('clearmob')
 
 
-class CompanyUrlError(Exception): 
-    def __init__(self,*args, **kwargs):
+class CompanyUrlError(Exception):
+    """Custom Company URL Exception"""
+    def __init__(self, *args, **kwargs):
         super(Exception, self).__init__(*args, **kwargs)
 
 
-class CompanyNameError(Exception): 
-    def __init__(self,*args, **kwargs):
+class CompanyNameError(Exception):
+    """Custom Company URL Exception"""
+    def __init__(self, *args, **kwargs):
         super(Exception, self).__init__(*args, **kwargs)
 
 
@@ -91,7 +93,7 @@ def clean_url(url):
     simply comment out this method call."""
     match = clean_url_re.match(url)
     if match:
-        return ''.join(match.group(1,2))
+        return ''.join(match.group(1, 2))
     return url
 
 
@@ -129,6 +131,7 @@ def search_page_for_company_cards(text):
 
 
 def get_company_name(company_card):
+    """Returns company name for a particular company card"""
     try:
         title_h = company_card.find(class_=COMPANY_NAME_DIV)
         return title_h.a.text.strip()
@@ -158,9 +161,9 @@ def create_company_dict(url, title, company_card=None):
         company_url = get_company_url(company_card)
     except CompanyUrlError:
         company_url = UNKNOWN_COMPANY_URL
-    return {URL_KEY : url,
-            TITLE_KEY : title, COMPANY_NAME_KEY : company_name,
-            COMPANY_URL_KEY : company_url}
+    return {URL_KEY: url,
+            TITLE_KEY: title, COMPANY_NAME_KEY: company_name,
+            COMPANY_URL_KEY: company_url}
 
 
 def extract_companies_from_page(response):
@@ -180,7 +183,6 @@ def search_child_pages(cleaned_links):
 
     Args:
         cleaned_links: list of links to search
-    
     Returns:
         A list of dictionaries with url, title, company_name,
         and company_title as attributes.
@@ -194,7 +196,7 @@ def search_child_pages(cleaned_links):
         counter += 1
         if counter % 5 == 0:
             logging.info("Parsing descendant page {}-{}".format(
-                counter-4, counter))
+                counter - 4, counter))
         final_list.extend(extract_companies_from_page(response))
     return final_list
 
