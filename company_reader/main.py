@@ -64,7 +64,7 @@ class CompanyNameError(Exception):
 
 def exception_handler(request, exception):
     """Handle exceptions"""
-    logger.error("Request {} failed".format(request.url))
+    logger.error("Request {} failed".format(request.__dict__))
 
 
 def is_viable_link(link):
@@ -190,12 +190,12 @@ def search_child_pages(cleaned_links):
     data = [grequests.get(link) for link in cleaned_links]
     responses = grequests.imap(data, size=20)
     final_list = []
-    logging.info("Searching descendant pages")
+    logging.info('Searching descendant pages')
     counter = 0
     for response in responses:
         counter += 1
         if counter % 5 == 0:
-            logging.info("Parsing descendant page {}-{}".format(
+            logging.info('Parsing descendant page {}-{}'.format(
                 counter - 4, counter))
         final_list.extend(extract_companies_from_page(response))
     return final_list
@@ -215,8 +215,8 @@ def write_file(filename, rs):
 def parse_command_line_filename():
     """Return filename from command line"""
     parser = argparse.ArgumentParser(
-        description=("Read TechCrunch website and output company info to a"
-                     " csv file path passed in"))
+        description=('Read TechCrunch website and output company info to a'
+                     ' csv file path passed in'))
     parser.add_argument('filename', help='file name to write csv output')
     args = parser.parse_args()
     return args.filename
