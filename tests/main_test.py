@@ -1,12 +1,11 @@
 """Test script for techcrunch crawler"""
 
 import unittest.mock as mock
-
 from bs4 import BeautifulSoup
+import pytest
 
 import company_reader.main as main
 
-import pytest
 
 
 HTML_TITLE = 'taco_title'
