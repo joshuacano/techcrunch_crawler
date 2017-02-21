@@ -224,4 +224,4 @@ if __name__ == "__main__":
     viable_links = read_main_page(TECH_URL)
     cleaned_links = dedupe_urls(viable_links)
     company_list = search_child_pages(cleaned_links)
-    write_file(filename, sorted(company_list, key=lambda a: a['url']))
+    write_file(filename, sorted(company_list, key=lambda a: a[URL_KEY]))
