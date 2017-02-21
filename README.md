@@ -23,4 +23,4 @@ or
 
 To run the tests:
 `python3 -m pytest tests/main_test.py`
-or simply 'py.test'
+or simply `py.test`
