@@ -201,7 +201,7 @@ def search_child_pages(cleaned_links):
 
 def write_file(filename, rs):
     """Write csv file of recordset"""
-    keys = [TITLE_KEY, URL_KEY, COMPANY_NAME_KEY, COMPANY_URL_KEY]
+    keys = [COMPANY_NAME_KEY, COMPANY_URL_KEY, TITLE_KEY, URL_KEY]
     with open(filename, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=keys)
         writer.writeheader()
