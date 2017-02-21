@@ -217,7 +217,7 @@ def parse_command_line_filename():
     parser = argparse.ArgumentParser(
         description="""Read TechCrunch website and output company info to a
         csv file path passed in""")
-    parser.add_argument('filename', help='file path to csv output')
+    parser.add_argument('filename', help='file name to write csv output')
     args = parser.parse_args()
     return args.filename
 
